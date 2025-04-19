@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HouseType Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>House Type Prediction</h1>
+        
+        <div class="result-box">
+            <h2>Prediction: <span class="highlight">{{ prediction }}</span></h2>
+            <p>Estimated Price Range: <span class="highlight">{{ price }}</span></p>
+        </div>
+        
+        
+
+        <h3>Here are the key insights behind the prediction:</h3>
+        <div class="explanation-box">
+            <ul>
+                {% for point in explanation_points %}
+                    <li>{{ point }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        
+        
+        <a href="/index" class="btn">Go Back</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,146 @@
+/* General Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to bottom right, #8e44ad, #d5ccc9);
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+    padding: 50px 40px;
+    background-color: rgba(56, 1, 40, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    width: 520px;
+    margin: 20px 0;
+}
+
+h1, h2 {
+    font-size: 24px; /* Reduced size for title */
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.description {
+    font-size: 20px;
+    color: rgba(47, 46, 47, 0.85);
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+h3 {
+    font-size: 18px; /* Reduced size for heading */
+    color: #fff;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
+    font-weight: 500;
+    outline: none;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+input[type="number"]:focus,
+select:focus {
+    border-color: #8e44ad;
+    box-shadow: 0 0 0 2px rgba(142, 68, 173, 0.2);
+}
+
+/* Button Styles */
+.btn, 
+input[type="submit"].btn {
+    display: inline-block;
+    background-color: #dcd6e3;
+    color: #222;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    text-transform: uppercase;
+}
+
+.btn:hover,
+input[type="submit"].btn:hover {
+    background-color: #bbaed1;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active,
+input[type="submit"].btn:active {
+    background-color: #a592c0;
+    transform: translateY(2px);
+}
+
+/* Result Box */
+.result-box {
+    background-color: rgba(200, 200, 200, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    color: #fff;
+    text-align: left;
+}
+
+.highlight {
+    color: #e0a9ef; /* Highlighted text color */
+    font-weight: bold;
+    font-size: 22px; /* Ensuring the text size is consistent */
+}
+
+.result-box h2, .result-box p {
+    font-size: 15px; /* Ensuring both Prediction and Price Range are the same size */
+    margin: 10px 0;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.explanation-box {
+    background-color: rgba(255, 255, 255, 0.15);
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: left;
+    color: #d9d9d9; /* Changed color to black */
+}
