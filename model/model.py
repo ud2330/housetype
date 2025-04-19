@@ -1,6 +1,6 @@
 import pandas as pd
-import pickle
 import os
+import joblib  # Using joblib for saving models
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
@@ -37,9 +37,9 @@ model.fit(X_train, y_train)
 # Create model directory if it doesn't exist
 os.makedirs("model", exist_ok=True)
 
-# Save model and encoders
-pickle.dump(model, open("model/house_model.pkl", "wb"))
-pickle.dump(label_encoders, open("model/label_encoders.pkl", "wb"))
-pickle.dump(target_encoder, open("model/target_encoder.pkl", "wb"))
+# Save model and encoders using joblib (recommended for large models)
+joblib.dump(model, "model/house_model.pkl")  # Save model
+joblib.dump(label_encoders, "model/label_encoders.pkl")  # Save label encoders
+joblib.dump(target_encoder, "model/target_encoder.pkl")  # Save target encoder
 
 print("✅ Model and encoders saved successfully.")

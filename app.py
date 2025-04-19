@@ -1,13 +1,13 @@
 from flask import Flask, render_template, request
-import pickle
+import joblib  # Switching from pickle to joblib for better compatibility with large models
 import pandas as pd
 
 app = Flask(__name__)
 
 # Load model and encoders
-model = pickle.load(open("model/house_model.pkl", "rb"))
-label_encoders = pickle.load(open("model/label_encoders.pkl", "rb"))
-target_encoder = pickle.load(open("model/target_encoder.pkl", "rb"))
+model = joblib.load("model/house_model.pkl")
+label_encoders = joblib.load("model/label_encoders.pkl")
+target_encoder = joblib.load("model/target_encoder.pkl")
 
 @app.route('/')
 def home():
@@ -27,7 +27,11 @@ def predict():
         location = request.form['location']
         budget = int(request.form['budget'])
 
-        # Create DataFrame
+        # Ensure all input data is valid
+        if not style or not location:
+            raise ValueError("Please provide valid 'style' and 'location' values.")
+
+        # Create DataFrame from inputs
         input_data = pd.DataFrame([[BHK, style, stories, location, budget]],
                                   columns=['BHK', 'Architectural Style', 'Stories', 'Location Type', 'Budget'])
 
@@ -35,6 +39,9 @@ def predict():
         for col in ['Architectural Style', 'Location Type']:
             if col in label_encoders:
                 le = label_encoders[col]
+                # Check if the label exists in the encoder
+                if style not in le.classes_ or location not in le.classes_:
+                    raise ValueError(f"Invalid {col} value: {style if col == 'Architectural Style' else location}")
                 input_data[col] = le.transform(input_data[col])
             else:
                 raise ValueError(f"Unknown label for column: {col}")
@@ -56,6 +63,7 @@ def predict():
         price_range = f"{int(budget * 0.9):,} - {int(budget * 1.1):,}"
         display_price = f"{price_range} INR"
 
+        # Return the result page
         return render_template(
             'result.html',
             prediction=house_type,
@@ -63,7 +71,12 @@ def predict():
             explanation_points=explanation_points
         )
 
+    except ValueError as e:
+        # If a value error is raised (invalid input), show an error page
+        return render_template('error.html', error_message=str(e))
+
     except Exception as e:
+        # If any other error occurs, show a general error message
         return f"An error occurred during prediction: {str(e)}"
 
 if __name__ == '__main__':
